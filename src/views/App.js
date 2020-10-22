@@ -37,7 +37,7 @@ function App() {
         'Authorization': `Token ${token}`
       }
     }
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/${id}`, options);
+    const res = await fetch(`${process.env.REACT_APP_API_HOST}/${id}`, options);
     const data = await res.json();
     setQuestion(data.title);
   }
@@ -57,7 +57,7 @@ function App() {
       }
     }
     if (select > 0) {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/${id}`, options);
+      const res = await fetch(`${process.env.REACT_APP_API_HOST}/${id}`, options);
       const data = await res.json();
       setMsg(data.status_code ?
         { text: "Oops.. an error ocurred, may be a missing field or something on our end", type: "error" } :

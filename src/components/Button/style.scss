@@ -50,6 +50,7 @@ a{
         label{
             margin: 0;
             font-weight: normal;
+            color:black;
         }
         .label-content{
             div{
@@ -142,4 +143,8 @@ a{
             margin-top: 2px;
         }
     }
+}
+
+.visible{
+    visibility: visible !important;
 }

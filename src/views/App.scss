@@ -31,7 +31,7 @@ body{
     color: $gray-800;
 }
 
-html,body, button{
+html,body, button, .alert{
     font-family: "Roboto" !important;
     font-weight: 400;
 }
@@ -48,7 +48,7 @@ h2{
     font-size: 24px !important;
 }
 
-.alert{
+.clickable{
     cursor: pointer;
 }
 

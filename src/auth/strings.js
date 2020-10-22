@@ -6,7 +6,8 @@ const en = {
     "Are you sure about you answer?":"Are you sure about you answer?",
     "yes":"YES",
     "no":"NO",
-    "Put your thoughts here...":"Put your thoughts here..."
+    "Put your thoughts here...":"Put your thoughts here...",
+    "Send answer":"Send answer"
 }
 
 const es = {
@@ -17,7 +18,8 @@ const es = {
     "Are you sure about you answer?":"¿Estás seguro/a de tu respuesta?",
     "yes":"SI",
     "no":"NO",
-    "Put your thoughts here...":"Pon tus comentarios aquí..."
+    "Put your thoughts here...":"Pon tus comentarios aquí...",
+    "Send answer":"Enviar respuesta"
 }
 
 export default {en, es}; 

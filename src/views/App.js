@@ -26,7 +26,7 @@ function App() {
     const [msg, setMsg] = useState({ text: "", type: null });
 
     useEffect(() => {
-        getQuestion();
+       token ? getQuestion() : setMsg({ text: "Please specify a valid token", type: "error" });
     }, []);
 
     //get question by id using an access token

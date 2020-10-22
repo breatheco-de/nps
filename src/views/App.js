@@ -41,8 +41,8 @@ function App() {
         try {
             const res = await fetch(`${process.env.REACT_APP_API_HOST}/feedback/answer/${id}`, options);
             const data = await res.json();
-            //if (data.status && data.status.toLowerCase() === "answered") setMsg({ text: "This survey have already been answered", type: "error" });
-            if (data.status_code > 201) setMsg({ text: data.details, type: "error" })
+            if (data.status && data.status.toLowerCase() === "answered") setMsg({ text: "This survey have already been answered", type: "error" });
+            else if (data.status_code > 201) setMsg({ text: data.details, type: "error" })
             else setQuestion(data.title);
         } catch (error) {
             setMsg({ text: error, type: "error" })

@@ -2,14 +2,7 @@
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
-$theme-colors: (
-    "primary": #4285ff,
-    "primary-light": #E3F2FF,
-    "success-light":#F2FFF8,
-    "secondary-light":#F5F5F5,
-    "danger-light": #FFF5F2,
-);
-
+@import "theme";
 @import "~bootstrap/scss/bootstrap";
 
 @each $color, $value in $theme-colors {
@@ -31,23 +24,7 @@ body{
     color: $gray-800;
 }
 
-html,body, button, .alert{
-    font-family: "Roboto" !important;
-    font-weight: 400;
-}
-
-h1{
-    font-weight: 700 !important;
-    line-height: 42px;
-    font-size: 36px !important;
-}
-
-h2{
-    font-weight: 700 !important;
-    line-height: 42px;
-    font-size: 24px !important;
-}
-
+@import "fonts";
 .clickable{
     cursor: pointer;
 }

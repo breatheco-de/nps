@@ -1,14 +1,14 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import App from "./views/App";
+import Survey from "./views/Survey";
 import {Alert} from "react-bootstrap";
-import "./views/App.scss";
+import "./styles/styles.scss";
 
 const Layout = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path="/:id" component={App}/>
+                <Route exact path="/:id" component={Survey}/>
                 <Route render={() => 
                     <div className="container">
                         <Alert 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Button from "../components/Button";
 import TextArea from "../components/TextArea";
 import strings from "../auth/strings";
-import './App.scss';
 import Dropdown from '../components/Dropdown';
 import useWindowDimensions from "../auth/useWindowDimensions";
 import { Alert } from 'react-bootstrap';
@@ -40,12 +39,18 @@ function App() {
         }
         try {
             const res = await fetch(`${process.env.REACT_APP_API_HOST}/feedback/answer/${id}`, options);
+            if(res.status == 500) throw Error("There was an error retrieving the survey")
+            if(res.status > 399 && res.status < 499){
+                if(res.status === 401) throw Error("Invalid token");
+                
+                const data = await res.json();
+                throw Error(data.details || data.error || "There wasn completing this request")
+            } 
+                
             const data = await res.json();
-            if (data.status && data.status.toLowerCase() === "answered") setMsg({ text: "This survey have already been answered", type: "error" });
-            else if (data.status_code > 201) setMsg({ text: data.details, type: "error" })
-            else setQuestion(data.title);
+            setQuestion(data.title);
         } catch (error) {
-            setMsg({ text: error, type: "error" })
+            setMsg({ text: error.message || error, type: "error" })
         }
     }
 
@@ -66,12 +71,15 @@ function App() {
         if (select > 0) {
             try {
                 const res = await fetch(`${process.env.REACT_APP_API_HOST}/feedback/answer/${id}`, options);
-                const data = await res.json();
-                setMsg(data.status_code ?
-                    { text: "Oops.. an error ocurred, may be a missing field or something on our end", type: "error" } :
-                    { text: "Your feedback have been sent succesfully", type: "success" });
+                if(res.status == 500) throw Error("There was an error retrieving the survey")
+                if(res.status > 399 && res.status < 499){
+                    const data = await res.json();
+                    throw Error(data.details || data.error || "There wasn completing this request")
+                } 
+                
+                setMsg({ text: "Your feedback have been sent succesfully", type: "success" });
             } catch (error) {
-                setMsg({ text: "Oops.. an error ocurred, may be a missing field or something on our end", type: "error" });
+                setMsg({ text: error.message || error, type: "error" });
             }
         } else {
             setMsg({ text: "Choose a number so we can submit your vote", type: "error" })

@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react"
+import React from "react"
 import { Button } from "react-bootstrap";
 import Icon from "../Icons";
 import  './style.scss';
@@ -41,7 +41,7 @@ SmartButton.propTypes = {
 };
 
 SmartButton.defaultProps = {
-    variant: 'primary-light',
+    variant: '',
     children: null,
     to:null,
     className: "",

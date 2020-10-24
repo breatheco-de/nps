@@ -10,7 +10,7 @@ a{
     font-style: normal;
     font-weight: normal;
     border:none !important;
-    font-size: 18px !important;
+    font-size: 18px;
     display: inline-flex !important;
     position: relative;
     text-align: left !important;
@@ -39,6 +39,7 @@ a{
         margin-left: auto;
     }
     .hover-layer{
+        overflow: hidden;
         cursor: pointer;
         display: flex;
         position: absolute;

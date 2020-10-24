@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import Button from "../components/Button";
 import TextArea from "../components/TextArea";
-import strings from "../auth/strings";
+import strings from "../helper/strings";
 import Dropdown from '../components/Dropdown';
-import useWindowDimensions from "../auth/useWindowDimensions";
+import useWindowDimensions from "../helper/useWindowDimensions";
 import { Alert } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
+import getQuery from "../helper/getUrlParameter";
+import getErrors from "../helper/statusError";
 
 function App() {
-    function getUrlParameter(name) {
-        let params = new URLSearchParams(window.location.search);
-        return params.has(name) ? params.get(name) : null;
-    }
     const { width } = useWindowDimensions();
     const [select, setSelect] = useState(0);
     const [send, setSend] = useState(false);
     const [comment, setComment] = useState("");
-    const [options] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const [focused, setFocused] = useState("");
     const { id } = useParams();
-    const [question, setQuestion] = useState("");
-    const [token] = useState(getUrlParameter("token"));
-    const [lang] = useState(getUrlParameter("lang"));
+    const [question, setQuestion] = useState("Hello thank you and everything bla bla");
+    const query = {
+        token: getQuery("token"),
+        lang: getQuery("lang")
+    }
     const [msg, setMsg] = useState({ text: "", type: null });
 
     useEffect(() => {
-       token ? getQuestion() : setMsg({ text: "Please specify a valid token", type: "error" });
+        query.token ? getQuestion() : setMsg({ text: "Please specify a valid token", type: "error" });
     }, []);
 
     //get question by id using an access token
@@ -34,20 +34,13 @@ function App() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Token ${token}`
+                'Authorization': `Token ${query.token}`
             }
         }
         try {
             const res = await fetch(`${process.env.REACT_APP_API_HOST}/feedback/answer/${id}`, options);
-            if(res.status == 500) throw Error("There was an error retrieving the survey")
-            if(res.status > 399 && res.status < 499){
-                if(res.status === 401) throw Error("Invalid token");
-                
-                const data = await res.json();
-                throw Error(data.details || data.error || "There wasn completing this request")
-            } 
-                
             const data = await res.json();
+            getErrors(res, data);
             setQuestion(data.title);
         } catch (error) {
             setMsg({ text: error.message || error, type: "error" })
@@ -55,7 +48,7 @@ function App() {
     }
 
     //send user feedback function
-    const sendVote = async (e) => {
+    const sendVote = async () => {
         const options = {
             method: "PUT",
             body: JSON.stringify({
@@ -65,18 +58,14 @@ function App() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Token ${token}`
+                'Authorization': `Token ${query.token}`
             }
         }
         if (select > 0) {
             try {
                 const res = await fetch(`${process.env.REACT_APP_API_HOST}/feedback/answer/${id}`, options);
-                if(res.status == 500) throw Error("There was an error retrieving the survey")
-                if(res.status > 399 && res.status < 499){
-                    const data = await res.json();
-                    throw Error(data.details || data.error || "There wasn completing this request")
-                } 
-                
+                const data = await res.json();
+                getErrors(res, data);
                 setMsg({ text: "Your feedback have been sent succesfully", type: "success" });
             } catch (error) {
                 setMsg({ text: error.message || error, type: "error" });
@@ -112,7 +101,7 @@ function App() {
                                     </div> :
                                     <>
                                         <div className="col-md-2 text-right">
-                                            {strings[lang || "en"]["not usefull"]}
+                                            {strings[query.lang || "en"]["not usefull"]}
                                         </div>
                                         <div className="col-md-8">
                                             {
@@ -120,7 +109,7 @@ function App() {
                                             }
                                         </div>
                                         <div className="col-md-2 text-left">
-                                            {strings[lang || "en"]["very usefull"]}
+                                            {strings[query.lang || "en"]["very usefull"]}
                                         </div>
                                     </>
                                 }
@@ -128,12 +117,12 @@ function App() {
 
                             <div className="row text-center mt-4">
                                 <div className="col-12">
-                                    <h2>{strings[lang || "en"]["Aditional Comments"]}</h2>
+                                    <h2>{strings[query.lang || "en"]["Aditional Comments"]}</h2>
                                     <TextArea
                                         id="comments"
                                         name="comments"
                                         rows="4"
-                                        placeholder={strings[lang || "en"]["Put your thoughts here..."]}
+                                        placeholder={strings[query.lang || "en"]["Put your thoughts here..."]}
                                         onChange={e => setComment(e.target.value)}
                                         value={comment}
                                         required
@@ -142,24 +131,24 @@ function App() {
                             </div>
                             <div className="row text-center mt-4">
                                 <div className="col-12">
-                                    {!send ? <Button style={{ width: "100%", padding: "20px" }} icon="arrow" variant="primary" onClick={() => setSend(true)}>
-                                        <Button.Label>
-                                            {strings[lang || "en"]["Send answer"]}
+                                    {!send ? <Button className="w-100 p-4" icon="arrow" variant="primary" onClick={() => setSend(true)}>
+                                        <Button.Label className={width <= 375 ? "mobile" : ""}>
+                                            {strings[query.lang || "en"]["Send answer"]}
                                         </Button.Label>
-                                    </Button>:
-                                    <Button style={{ width: "100%", padding: "20px" }} icon="arrow" variant="primary">
-                                        <Button.Label>
-                                            {strings[lang || "en"]["Are you sure about you answer?"]}
-                                        </Button.Label>
-                                        <Button.HoverLayer className="visible">
-                                            <Button.Label icon="check-mark" className="pt-1 pl-3 pr-3 bg-success-light" onClick={(e) => sendVote(e)}>
-                                                {strings[lang || "en"]["yes"]}
+                                    </Button> :
+                                        <Button className="w-100 p-4" icon="arrow" variant="primary">
+                                            <Button.Label className={width <= 375 ? "mobile" : ""}>
+                                                {strings[query.lang || "en"]["Are you sure about your answer?"]}
                                             </Button.Label>
-                                            <Button.Label icon="fix" iconColor="red" className="pt-1 pl-3 pr-3 bg-danger-light" onClick={() => { setSend(false) }}>
-                                                {strings[lang || "en"]["no"]}
-                                            </Button.Label>
-                                        </Button.HoverLayer>
-                                    </Button>}
+                                            <Button.HoverLayer className="visible">
+                                                <Button.Label icon="check-mark" className="pt-1 pl-3 pr-3 bg-success-light" onClick={(e) => sendVote(e)}>
+                                                    {strings[query.lang || "en"]["yes"]}
+                                                </Button.Label>
+                                                <Button.Label icon="fix" iconColor="red" className="pt-1 pl-3 pr-3 bg-danger-light" onClick={() => { setSend(false) }}>
+                                                    {strings[query.lang || "en"]["no"]}
+                                                </Button.Label>
+                                            </Button.HoverLayer>
+                                        </Button>}
                                 </div>
                             </div>
                         </form>

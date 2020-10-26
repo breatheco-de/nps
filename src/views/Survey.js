@@ -17,7 +17,7 @@ function App() {
     const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const [focused, setFocused] = useState("");
     const { id } = useParams();
-    const [question, setQuestion] = useState("Hello thank you and everything bla bla");
+    const [question, setQuestion] = useState("");
     const query = {
         token: getQuery("token"),
         lang: getQuery("lang")
@@ -61,7 +61,6 @@ function App() {
                 'Authorization': `Token ${query.token}`
             }
         }
-        if (select > 0) {
             try {
                 const res = await fetch(`${process.env.REACT_APP_API_HOST}/feedback/answer/${id}`, options);
                 const data = await res.json();
@@ -70,11 +69,13 @@ function App() {
             } catch (error) {
                 setMsg({ text: error.message || error, type: "error" });
             }
-        } else {
-            setMsg({ text: "Choose a number so we can submit your vote", type: "error" })
-        }
     }
 
+    const checkSubmit = () =>{
+        if(select === 0 ) setMsg({ text: "Choose a number so we can submit your vote", type: null , inner: true});
+        else setSend(true);
+    }
+ 
     return (
         <>
             {
@@ -85,6 +86,11 @@ function App() {
                         </Alert>
                     </div> :
                     <div className="container">
+                        { msg.inner ? 
+                            <Alert variant="danger" className="shadow-one mt-4 d-flex">
+                                {msg.text}
+                            </Alert> : ""
+                        }
                         <form>
                             <div className="row text-center mt-4">
                                 <div className="col-md-12 col-12">
@@ -105,7 +111,7 @@ function App() {
                                         </div>
                                         <div className="col-md-8">
                                             {
-                                                options.map((number, index) => <Button key={index} className={`ml-3 mt-2 ${focused === index ? "focus" : ""}`} onClick={() => { setFocused(number - 1); setSelect(number) }}>{number}</Button>)
+                                                options.map((number, index) => <Button key={index} className={`ml-3 mt-2 ${focused === index ? "focus" : ""}`} onClick={() => { setFocused(number - 1); setSelect(number); setMsg({...msg, inner:false}) }}>{number}</Button>)
                                             }
                                         </div>
                                         <div className="col-md-2 text-left">
@@ -131,7 +137,7 @@ function App() {
                             </div>
                             <div className="row text-center mt-4">
                                 <div className="col-12">
-                                    {!send ? <Button className="w-100 p-4" icon="arrow" variant="primary" onClick={() => setSend(true)}>
+                                    {!send ? <Button className="w-100 p-4" icon="arrow" variant="primary" onClick={() => checkSubmit()}>
                                         <Button.Label className={width <= 375 ? "mobile" : ""}>
                                             {strings[query.lang || "en"]["Send answer"]}
                                         </Button.Label>

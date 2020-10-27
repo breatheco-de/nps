@@ -3,10 +3,11 @@ const en = {
     "not usefull":"Not usefull",
     "very usefull":"Very usefull",
     "Aditional Comments":"Aditional Comments",
-    "Are you sure about you answer?":"Are you sure about you answer?",
+    "Are you sure about your answer?":"Are you sure about your answer?",
     "yes":"YES",
     "no":"NO",
-    "Put your thoughts here...":"Put your thoughts here..."
+    "Put your thoughts here...":"Put your thoughts here...",
+    "Send answer":"Send answer"
 }
 
 const es = {
@@ -14,10 +15,11 @@ const es = {
     "not usefull":"No muy util",
     "very usefull":"Muy útil",
     "Aditional Comments":"Comentarios Adicionales",
-    "Are you sure about you answer?":"¿Estás seguro/a de tu respuesta?",
+    "Are you sure about your answer?":"¿Estás seguro/a de tu respuesta?",
     "yes":"SI",
     "no":"NO",
-    "Put your thoughts here...":"Pon tus comentarios aquí..."
+    "Put your thoughts here...":"Pon tus comentarios aquí...",
+    "Send answer":"Enviar respuesta"
 }
 
 export default {en, es}; 

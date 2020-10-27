@@ -43,7 +43,6 @@ const SmartDropdown = (props) => {
             '&:hover': { borderColor: 'gray' },
             border: '1px none #FBFBFB',
             fontSize:"16px",
-            boxShadow:"0px 1px 3px 0px rgba(0, 0, 0, 0.4)",
             zIndex:999
         }),
         menu: styles => ({

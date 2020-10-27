@@ -1,0 +1,23 @@
+/**
+- size
+- letter spacing
+- weight
+**/
+
+html,body, button, .alert{
+    font-family: "Roboto" !important;
+    font-weight: 400;
+    color: black;
+}
+
+h1{
+    font-weight: 700 !important;
+    line-height: 42px;
+    font-size: 27px;
+}
+
+h2{
+    font-weight: 700 !important;
+    line-height: 42px;
+    font-size: 24px !important;
+}

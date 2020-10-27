@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react"
+import React from "react"
 import { Button } from "react-bootstrap";
 import Icon from "../Icons";
 import  './style.scss';
@@ -25,7 +25,7 @@ const SmartButton = ({ children, variant, onClick, icon, to, className,onHover, 
     )
 }
 
-SmartButton.HoverLayer = ({children, variant = "", ...rest}) => <div className={`hover-layer ${variant}`} {...rest}>{children}</div>
+SmartButton.HoverLayer = ({children, variant = "",className, ...rest}) => <div className={`hover-layer ${variant}${className}`} {...rest}>{children}</div>
 SmartButton.Label = ({children, icon, variant = "",iconColor, ...rest}) => <>{icon ? <div className={`label-content ${variant}`} {...rest}><div><Icon name={icon} size='md' color={iconColor} /></div><label>{children}</label></div> : <label className={`button-label ${variant}`} {...rest}>{children}</label>}</>
 SmartButton.Section = ({children, variant = "", ...rest}) => <div className={`button-section ${variant}`} {...rest}>{children}</div>
 
@@ -41,7 +41,7 @@ SmartButton.propTypes = {
 };
 
 SmartButton.defaultProps = {
-    variant: 'primary-light',
+    variant: '',
     children: null,
     to:null,
     className: "",

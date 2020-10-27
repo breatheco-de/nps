@@ -1,8 +1,6 @@
 const en = {
     "How usefull was this coding session for you?":"How usefull was this coding session for you?",
-    "not usefull":"Not usefull",
-    "very usefull":"Very usefull",
-    "Aditional Comments":"Aditional Comments",
+    "Additional Comments":"Additional Comments",
     "Are you sure about your answer?":"Are you sure about your answer?",
     "yes":"YES",
     "no":"NO",
@@ -12,9 +10,7 @@ const en = {
 
 const es = {
     "How usefull was this coding session for you?":"¿Qué tan útil fue esta sesión para ti?",
-    "not usefull":"No muy util",
-    "very usefull":"Muy útil",
-    "Aditional Comments":"Comentarios Adicionales",
+    "Additional Comments":"Comentarios Adicionales",
     "Are you sure about your answer?":"¿Estás seguro/a de tu respuesta?",
     "yes":"SI",
     "no":"NO",

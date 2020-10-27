@@ -29,15 +29,8 @@ body{
     cursor: pointer;
 }
 
-.focus{
-    &:focus{
-        background: #4285ff !important;
+.question, .confirmation{
+    @media (max-width: 768px){
+        font-size: 14px;
     }
-    &:active{
-        background: #4285ff !important;
-    }
-}
-
-.mobile{
-    font-size: 14px !important;
 }

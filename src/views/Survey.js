@@ -51,7 +51,7 @@ function App() {
         <div className="row text-center mt-5 d-md-none">
             <div className="col-12">
                 <Dropdown
-                    options={options.map(number => ({ 
+                    options={options.reverse().map(number => ({ 
                         value: number, 
                         label: number == 1 ? `${number} - ${question.lowest}` : number === options.length ? `${number} - ${question.highest}` : number 
                     }))}

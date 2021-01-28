@@ -4,7 +4,7 @@ import { IconContext } from "react-icons"
 import { IoLogoGithub } from "react-icons/io"
 import { FcCollaboration, FcHome, FcGraduationCap, FcSettings, FcBriefcase, FcButtingIn, FcCheckmark } from "react-icons/fc";
 import { FiArrowRightCircle,FiX } from "react-icons/fi";
-import { BsArrowRight,BsArrowDown } from "react-icons/bs";
+import { BsArrowRight,BsArrowDown, BsArrowLeft } from "react-icons/bs";
 export const icons = {
     'github': IoLogoGithub,
     'collaboration': FcCollaboration,
@@ -15,6 +15,7 @@ export const icons = {
     'briefcase': FcBriefcase,
     'arrow-right': FiArrowRightCircle,
     'arrow': BsArrowRight,
+    'arrow-left': BsArrowLeft,
     'check-mark': FcCheckmark,
     "arrow-down": BsArrowDown,
     "fix":FiX

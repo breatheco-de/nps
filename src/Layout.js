@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import Survey from "./views/Survey";
+import Multiple from "./views/Multiple";
 import {Alert} from "react-bootstrap";
 import "./styles/styles.scss";
 
@@ -8,7 +8,8 @@ const Layout = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path="/:id" component={Survey}/>
+                <Route exact path="/survey/:survey_id" component={Multiple}/>
+                <Route exact path="/:answer_id" component={Multiple}/>
                 <Route render={() => 
                     <div className="container">
                         <Alert 

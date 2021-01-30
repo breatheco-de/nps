@@ -111,6 +111,7 @@ const SmartDropdown = (props) => {
                  }}
                 {...props}
                 variant="primary"
+                isSearchable={ false }
                 theme={customTheme}
                 styles={customStyles}
             />

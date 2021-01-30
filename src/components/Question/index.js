@@ -39,7 +39,7 @@ function Question({ question, onChange }) {
         </div>
         <div className="row text-center mt-4 d-none d-md-flex">
             <div className="col-1 col-lg-2 text-right pt-3">
-                {question.highest}
+                {question.lowest}
             </div>
             <div className="col-md-10 col-lg-8">
                 {
@@ -52,7 +52,7 @@ function Question({ question, onChange }) {
                 }
             </div>
             <div className="col-1 col-lg-2 text-left pt-3">
-                {question.lowest}
+                {question.highest}
             </div>
         </div>
 

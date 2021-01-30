@@ -37,7 +37,7 @@ function Question({ question, onChange }) {
                 />
             </div>
         </div>
-        <div className="row text-center mt-4 d-none d-md-flex">
+        <div className="row text-center mt-4 d-none d-md-flex" style={{ maxWidth: "570px", justifyContent: "center" }}>
             <div className="col-1 col-lg-2 text-right pt-3">
                 {question.lowest}
             </div>

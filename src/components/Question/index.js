@@ -37,11 +37,11 @@ function Question({ question, onChange }) {
                 />
             </div>
         </div>
-        <div className="row text-center mt-4 d-none d-md-flex" style={{ maxWidth: "570px", justifyContent: "center" }}>
+        <div className="row text-center mt-4 d-none d-md-flex" style={{ justifyContent: "center" }}>
             <div className="col-1 col-lg-2 text-right pt-3">
                 {question.lowest}
             </div>
-            <div className="col-md-10 col-lg-8">
+            <div className="col-md-10 col-lg-8" style={{ maxWidth: "570px" }}>
                 {
                     options.desktop.map((number, index) => 
                         <Button key={index} className={`ml-3 mt-2 ${focused >= index ? "bg-primary text-white" : ""}`} 

@@ -21,7 +21,11 @@ const request = async (url, options={}) => {
 
     if(res.status === 500) throw Error("There was an error retrieving the survey");
     else if(res.status > 399 && res.status < 499){
-        if(res.status === 401) window.location.href = `${process.env.REACT_APP_API_HOST}/auth/view/login?url=${window.location.href.split('?')[0]}`
+        if(res.status === 401){
+            setTimeout(() => {
+                window.location.href = `${process.env.REACT_APP_API_HOST}/auth/view/login?url=${window.location.href.split('?')[0]}`
+            }, 2000)
+        } 
         const data = await res.json();
         if(res.status === 404) throw Error(data.details || data.detail || data.error || data.non_field_errors || "Question or Survey not found")
         throw Error(data.details || data.detail || data.error || data.non_field_errors || "There was an error completing this request")

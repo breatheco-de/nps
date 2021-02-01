@@ -62,6 +62,7 @@ function Question({ question, onChange }) {
                     id="comments"
                     name="comments"
                     rows="4"
+                    maxLength="1000"
                     placeholder={strings[question.lang]["Put your thoughts here..."]}
                     onChange={e => onChange({ ...question, comment: e.target.value })}
                     value={question.comment}

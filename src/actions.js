@@ -42,11 +42,11 @@ const request = async (url, options={}) => {
 }
 
 export const getQuestion = async (id) => {
-    return request(`/feedback/answer/${id}`);
+    return request(`/feedback/user/me/answer/${id}`);
 }
 
 export const getSurvey = async (id) => {
-    return request(`/feedback/student/me/survey/${id}/questions`);
+    return request(`/feedback/user/me/survey/${id}/questions`);
 }
 
 export const sendVote = async ({ score , comment, id }) => {
@@ -56,5 +56,5 @@ export const sendVote = async ({ score , comment, id }) => {
             score, comment, entity_id: id
         })
     }
-    return await request(`/feedback/answer/${id}`, options);
+    return await request(`/feedback/user/me/answer/${id}`, options);
 }

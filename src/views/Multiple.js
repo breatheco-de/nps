@@ -60,7 +60,7 @@ function App() {
             <Button variant={`shadow-one btn w-50 btn-secondary p-4`} onClick={() => setcurrentIndex(currentIndex-1)}>
                 <Icon className="ml-0" name={"arrow-left"} size='md' color="white" />
                 <SmartButton.Label className="question">
-                    {strings[]["Previous"]}
+                    {strings[lang]["Previous"]}
                 </SmartButton.Label>
             </Button> 
         }

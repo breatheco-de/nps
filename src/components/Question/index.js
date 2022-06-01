@@ -63,7 +63,7 @@ function Question({ question, onChange }) {
                     name="comments"
                     rows="4"
                     maxLength="1000"
-                    placeholder={strings[question.lang]["Put your thoughts here..."]}
+                    placeholder={strings[question.lang.toLowerCase()]["Put your thoughts here..."]}
                     onChange={e => onChange({ ...question, comment: e.target.value })}
                     value={question.comment}
                     required

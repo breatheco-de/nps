@@ -44,7 +44,7 @@ function App() {
     }, []);
 
     if(msg && msg.type === "success") return <Alert variant={msg.type} className="shadow-one d-flex">{msg.text}</Alert>;
-    console.log("Questions", questions)
+    const lang = questions[currentIndex].lang.toLowerCase();
     return (<div className="container-fluid">
         <Steps currentIndex={currentIndex} steps={!Array.isArray(questions) ? [] : questions.map((q,i) => ({ label: i }))} />
         { msg &&
@@ -60,15 +60,15 @@ function App() {
             <Button variant={`shadow-one btn w-50 btn-secondary p-4`} onClick={() => setcurrentIndex(currentIndex-1)}>
                 <Icon className="ml-0" name={"arrow-left"} size='md' color="white" />
                 <SmartButton.Label className="question">
-                    {strings[questions[currentIndex].lang]["Previous"]}
+                    {strings[]["Previous"]}
                 </SmartButton.Label>
             </Button> 
         }
         {!Array.isArray(questions) ? <p>Loading...</p> : questions.length == 0 ? null :
             <ConfirmSend 
             className={currentIndex > 0 ? "w-50" : "w-100"}
-            lang={questions[currentIndex].lang} 
-            label={currentIndex == questions.length - 1 ? strings[questions[currentIndex].lang]["Send answer"] : strings[questions[currentIndex].lang]["Next"]} 
+            lang={lang} 
+            label={currentIndex == questions.length - 1 ? strings[lang]["Send answer"] : strings[lang]["Next"]} 
             onSubmit={() => {
                 const q = questions[currentIndex];
                 if(q.score == null || !parseInt(q.score) || q.score > 10 || q.score < 0){

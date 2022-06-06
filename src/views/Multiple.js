@@ -44,7 +44,7 @@ function App() {
     }, []);
 
     if(msg && msg.type === "success") return <Alert variant={msg.type} className="shadow-one d-flex">{msg.text}</Alert>;
-    const lang = Array.isArray(questions) ? questions[currentIndex].lang.toLowerCase() : "en";
+    const lang = Array.isArray(questions) && typeof(questions[currentIndex]) !== "undefined" ? questions[currentIndex].lang.toLowerCase() : "en";
     return (<div className="container-fluid">
         <Steps currentIndex={currentIndex} steps={!Array.isArray(questions) ? [] : questions.map((q,i) => ({ label: i }))} />
         { msg &&
